@@ -2,43 +2,60 @@ import React, { PureComponent } from 'react';
 import Planet from 'common/components/Planet/Planet';
 import { IPlanet } from 'lib/models';
 
-export default class Home extends PureComponent<{}, { data: IPlanet }> {
+export default class Home extends PureComponent<{}, { 
+  isLoading: boolean, data: IPlanet 
+}> {
   state = {
-    api_link: 'https://api.nasa.gov/planetary/apod?',
-    api_key: 'mtSYdud5tT2ski8aMrDujU7SJEFXSCD1Sw4b43P6',
+    apiLink: 'https://api.nasa.gov/planetary/apod?',
+    apiKey: 'mtSYdud5tT2ski8aMrDujU7SJEFXSCD1Sw4b43P6',
+    isLoading: false,
     data: {
       title: '',
       explanation: '',
-      url: ''
+      url: '',
     },
   }
 
 
   componentDidMount() {
-    const {api_link, api_key} = this.state;
+    const { apiLink, apiKey } = this.state;
 
-    fetch(`${api_link}api_key=${api_key}`)
+    this.setState({
+      isLoading: true
+    })
+    fetch(`${apiLink}api_key=${apiKey}`)
       .then(res => res.json())
       .then(res => {
         this.setState({
           data: res
         });
       })
+      .then(res => {
+        this.setState({
+          isLoading: false
+        })
+      })
   }
 
   render() {
-    const {title, explanation, url} = this.state.data;
+    const { isLoading } = this.state;
+    const { title, explanation, url } = this.state.data;
 
     console.log(this.state.data)
     return (
       <div>
         <h1>Home</h1>
 
-        <Planet 
-          title={title} 
-          explanation={explanation}
-          url={url}
-        />
+        {
+          (isLoading) ?
+           <p>Loading...</p>   
+           : 
+           <Planet 
+           title={title} 
+           explanation={explanation}
+           url={url}
+         />
+        }
       </div>
     )
   }
