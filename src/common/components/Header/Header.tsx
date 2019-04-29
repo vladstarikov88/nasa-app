@@ -30,22 +30,11 @@ const headerItems = [
 		path: '/',
 		key: 'Home',
 		id: 1,
-	}, {
+	}, 
+	{
 		path: '/pricing',
 		key: 'Pricing',
 		id: 2,
-	}, {
-		path: '/blog',
-		key: 'Blog',
-		id: 3,
-	}, {
-		path: '/login',
-		key: 'SignIn',
-		id: 4,
-	}, {
-		path: '/registration',
-		key: 'SignUp',
-		id: 5,
 	},
 ];
 
@@ -70,20 +59,6 @@ const Header: React.FC<IProps> = ({onToggle, isMenuOpen, isAuthenticated}) => (
 				[styles.login]: !isAuthenticated,
 			})}
 		>
-			<Flex alignItems='center'>
-				<Flex indent='large'>
-					<LogoIcon className={styles.logoIcon} />
-				</Flex>
-				<Flex indent='large'>
-					<Flex
-						indent='small'
-						className={styles.headerLogoItem}
-						alignItems='center'
-					>
-						CusDeb
-					</Flex>
-				</Flex>
-			</Flex>
 			<Flex className={styles.tabsHeader}>
 				{!isAuthenticated && headerItems.map(({path, key, id}) => (
 					<NavLink

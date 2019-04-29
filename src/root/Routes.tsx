@@ -5,6 +5,9 @@ import {Route, Switch} from 'react-router-dom';
 
 import CommonLayout from 'common/components/Layouts/CommonLayout';
 
+import Home from 'pages/Home';
+import Pricing from 'pages/Pricing';
+
 const Routes = () => (
 	<Switch>
 		<Route
@@ -12,8 +15,8 @@ const Routes = () => (
 			render={() => (
 				<CommonLayout>
 					<Switch>
-						<Route exact path='/' render={() => <div>Home</div>} />
-						<Route path='/prising' render={() => <div>Prising</div>} />
+						<Route exact path='/' component={Home} />
+						<Route exact path='/pricing' component={Pricing} />
 					</Switch>
 				</CommonLayout>
 			)}
